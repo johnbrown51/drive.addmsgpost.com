@@ -4,12 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Drive Downloader</title>
-    <script defer src="script.js"></script>
+    <script>
+        function redirectToDownload() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const driveLink = urlParams.get('link');
+
+            if (driveLink) {
+                // Extract the file ID from the public link
+                const fileIdMatch = driveLink.match(/[-\w]{25,}/);
+                if (fileIdMatch) {
+                    const fileId = fileIdMatch[0];
+                    const downloadUrl = `https://drive.google.com/uc?id=${fileId}&export=download`;
+                    window.location.href = downloadUrl;
+                } else {
+                    document.body.innerHTML = '<p>Invalid Google Drive link.</p>';
+                }
+            } else {
+                document.body.innerHTML = '<p>No link provided. Please add ?link=YOUR_GOOGLE_DRIVE_LINK to the URL.</p>';
+            }
+        }
+    </script>
 </head>
-<body>
-    <h1>Google Drive Downloader</h1>
-    <p>Use this URL format to download files:</p>
-    <code>https://yourdomain.github.io/<b>FILE_ID</b></code>
-    <p>You will be automatically redirected to the download.</p>
+<body onload="redirectToDownload()">
+    <p>Redirecting...</p>
 </body>
 </html>
