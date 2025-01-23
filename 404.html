@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const path = window.location.pathname;
-            const fileId = path.replace(/^\/|\/$/g, ""); // Remove leading/trailing slashes
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        console.log("Current Path:", path);
 
-            if (fileId && fileId.match(/^[\w-]{25,}$/)) {
-                const downloadUrl = `https://drive.google.com/uc?id=${fileId}&export=download`;
-                window.location.href = downloadUrl;
-            } else {
-                document.body.innerHTML = "<p>Invalid or missing file ID in the URL.</p>";
-            }
-        });
-    </script>
-</head>
-<body>
-    <p>Redirecting to your file...</p>
-</body>
-</html>
+        const fileId = path.replace(/^\/|\/$/g, "").match(/^[\w-]{25,}$/);
+        if (fileId) {
+            const downloadUrl = `https://drive.google.com/uc?id=${fileId[0]}&export=download`;
+            window.location.href = downloadUrl;
+        } else {
+            document.body.innerHTML = "<p>Invalid or missing file ID in the URL.</p>";
+        }
+    });
+</script>
