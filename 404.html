@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Drive Downloader</title>
+    <title>Redirecting...</title>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const path = window.location.pathname;
             const fileId = path.replace(/^\/|\/$/g, ""); // Remove leading/trailing slashes
 
             if (fileId && fileId.match(/^[\w-]{25,}$/)) {
-                // Generate the Google Drive direct download URL
                 const downloadUrl = `https://drive.google.com/uc?id=${fileId}&export=download`;
                 window.location.href = downloadUrl;
             } else {
