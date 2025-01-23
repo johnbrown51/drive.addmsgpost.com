@@ -7,8 +7,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const path = window.location.pathname;
-            console.log("Current Path:", path);
-
             const fileId = path.replace(/^\/|\/$/g, "").match(/^[\w-]{25,}$/);
             if (fileId) {
                 const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId[0]}`;
